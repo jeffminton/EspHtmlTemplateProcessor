@@ -2,9 +2,10 @@
 #define FILE_READER_H
 
 #include <FS.h>
+#include <LittleFS.h>
 
 #ifdef ESP32
-#include <SPIFFS.h>
+#include <LittleFS.h>
 #endif
 
 class FileReader
@@ -29,10 +30,10 @@ public:
   // Open the specified file and return the result.
   bool open(const String& path)
   {
-    if (!SPIFFS.exists(path))
+    if (!LittleFS.exists(path))
       return false;
 
-    mFile = SPIFFS.open(path, "r");
+    mFile = LittleFS.open(path, "r");
     if (mFile)
       return true;
     else
